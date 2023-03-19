@@ -15,6 +15,11 @@ body {
   box-sizing: border-box;
 }
 
+// Fill vertical space
+html, body, #root, .App {
+  height: 100%;
+}
+
 .App,
 button {
   font-family: 'Acme', sans-serif;
