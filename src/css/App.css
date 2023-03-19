@@ -1,0 +1,310 @@
+@import url("https://fonts.googleapis.com/css2?family=Acme&display=swap");
+body {
+  font-size: 100%;
+  text-decoration: none;
+  vertical-align: baseline;
+  background: transparent;
+  margin: 0;
+  border: 0 none;
+  padding: 0; }
+
+* {
+  box-sizing: border-box; }
+
+.App,
+button {
+  font-family: 'Acme', sans-serif; }
+
+.App {
+  text-align: center;
+  background-color: #245953; }
+
+.App-header {
+  background-color: #245953;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: white; }
+
+.chess-board {
+  position: relative;
+  background-image: url("../images/chessboard.png");
+  aspect-ratio: 1/1;
+  max-height: 80vh;
+  margin: auto;
+  background-size: contain; }
+
+.piece,
+.hint {
+  height: 12.5%;
+  width: 12.5%;
+  position: absolute;
+  background-size: 100%;
+  top: 0;
+  left: 0; }
+
+.selected {
+  background-color: #eca722;
+  opacity: 0.5; }
+
+.hint {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 4.2%;
+  background-clip: content-box;
+  border-radius: 50%;
+  box-sizing: border-box; }
+
+.game-over-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #245953;
+  border: 10px solid black;
+  padding: 30px 40px;
+  width: 70%; }
+
+.game-over-text {
+  font-size: 70px;
+  color: white; }
+
+.new-game-bttn {
+  width: 50%;
+  padding: 10px;
+  border: none;
+  background: #4E6C50;
+  color: white;
+  margin-top: 30px;
+  font-size: 20px;
+  cursor: pointer; }
+  .new-game-bttn:hover {
+    background: #435d45; }
+
+.square-11 {
+  transform: translateY(700%) translateX(0%); }
+
+.square-12 {
+  transform: translateY(600%) translateX(0%); }
+
+.square-13 {
+  transform: translateY(500%) translateX(0%); }
+
+.square-14 {
+  transform: translateY(400%) translateX(0%); }
+
+.square-15 {
+  transform: translateY(300%) translateX(0%); }
+
+.square-16 {
+  transform: translateY(200%) translateX(0%); }
+
+.square-17 {
+  transform: translateY(100%) translateX(0%); }
+
+.square-18 {
+  transform: translateY(0%) translateX(0%); }
+
+.square-21 {
+  transform: translateY(700%) translateX(100%); }
+
+.square-22 {
+  transform: translateY(600%) translateX(100%); }
+
+.square-23 {
+  transform: translateY(500%) translateX(100%); }
+
+.square-24 {
+  transform: translateY(400%) translateX(100%); }
+
+.square-25 {
+  transform: translateY(300%) translateX(100%); }
+
+.square-26 {
+  transform: translateY(200%) translateX(100%); }
+
+.square-27 {
+  transform: translateY(100%) translateX(100%); }
+
+.square-28 {
+  transform: translateY(0%) translateX(100%); }
+
+.square-31 {
+  transform: translateY(700%) translateX(200%); }
+
+.square-32 {
+  transform: translateY(600%) translateX(200%); }
+
+.square-33 {
+  transform: translateY(500%) translateX(200%); }
+
+.square-34 {
+  transform: translateY(400%) translateX(200%); }
+
+.square-35 {
+  transform: translateY(300%) translateX(200%); }
+
+.square-36 {
+  transform: translateY(200%) translateX(200%); }
+
+.square-37 {
+  transform: translateY(100%) translateX(200%); }
+
+.square-38 {
+  transform: translateY(0%) translateX(200%); }
+
+.square-41 {
+  transform: translateY(700%) translateX(300%); }
+
+.square-42 {
+  transform: translateY(600%) translateX(300%); }
+
+.square-43 {
+  transform: translateY(500%) translateX(300%); }
+
+.square-44 {
+  transform: translateY(400%) translateX(300%); }
+
+.square-45 {
+  transform: translateY(300%) translateX(300%); }
+
+.square-46 {
+  transform: translateY(200%) translateX(300%); }
+
+.square-47 {
+  transform: translateY(100%) translateX(300%); }
+
+.square-48 {
+  transform: translateY(0%) translateX(300%); }
+
+.square-51 {
+  transform: translateY(700%) translateX(400%); }
+
+.square-52 {
+  transform: translateY(600%) translateX(400%); }
+
+.square-53 {
+  transform: translateY(500%) translateX(400%); }
+
+.square-54 {
+  transform: translateY(400%) translateX(400%); }
+
+.square-55 {
+  transform: translateY(300%) translateX(400%); }
+
+.square-56 {
+  transform: translateY(200%) translateX(400%); }
+
+.square-57 {
+  transform: translateY(100%) translateX(400%); }
+
+.square-58 {
+  transform: translateY(0%) translateX(400%); }
+
+.square-61 {
+  transform: translateY(700%) translateX(500%); }
+
+.square-62 {
+  transform: translateY(600%) translateX(500%); }
+
+.square-63 {
+  transform: translateY(500%) translateX(500%); }
+
+.square-64 {
+  transform: translateY(400%) translateX(500%); }
+
+.square-65 {
+  transform: translateY(300%) translateX(500%); }
+
+.square-66 {
+  transform: translateY(200%) translateX(500%); }
+
+.square-67 {
+  transform: translateY(100%) translateX(500%); }
+
+.square-68 {
+  transform: translateY(0%) translateX(500%); }
+
+.square-71 {
+  transform: translateY(700%) translateX(600%); }
+
+.square-72 {
+  transform: translateY(600%) translateX(600%); }
+
+.square-73 {
+  transform: translateY(500%) translateX(600%); }
+
+.square-74 {
+  transform: translateY(400%) translateX(600%); }
+
+.square-75 {
+  transform: translateY(300%) translateX(600%); }
+
+.square-76 {
+  transform: translateY(200%) translateX(600%); }
+
+.square-77 {
+  transform: translateY(100%) translateX(600%); }
+
+.square-78 {
+  transform: translateY(0%) translateX(600%); }
+
+.square-81 {
+  transform: translateY(700%) translateX(700%); }
+
+.square-82 {
+  transform: translateY(600%) translateX(700%); }
+
+.square-83 {
+  transform: translateY(500%) translateX(700%); }
+
+.square-84 {
+  transform: translateY(400%) translateX(700%); }
+
+.square-85 {
+  transform: translateY(300%) translateX(700%); }
+
+.square-86 {
+  transform: translateY(200%) translateX(700%); }
+
+.square-87 {
+  transform: translateY(100%) translateX(700%); }
+
+.square-88 {
+  transform: translateY(0%) translateX(700%); }
+
+.wr {
+  background-image: url("../images/pieces/wr.png"); }
+
+.wn {
+  background-image: url("../images/pieces/wn.png"); }
+
+.wb {
+  background-image: url("../images/pieces/wb.png"); }
+
+.wq {
+  background-image: url("../images/pieces/wq.png"); }
+
+.wk {
+  background-image: url("../images/pieces/wk.png"); }
+
+.wp {
+  background-image: url("../images/pieces/wp.png"); }
+
+.br {
+  background-image: url("../images/pieces/br.png"); }
+
+.bn {
+  background-image: url("../images/pieces/bn.png"); }
+
+.bb {
+  background-image: url("../images/pieces/bb.png"); }
+
+.bq {
+  background-image: url("../images/pieces/bq.png"); }
+
+.bk {
+  background-image: url("../images/pieces/bk.png"); }
+
+.bp {
+  background-image: url("../images/pieces/bp.png"); }

@@ -1,0 +1,111 @@
+@import 'global/variables';
+
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+body {  
+  font-size: 100%;
+  text-decoration: none;
+  vertical-align: baseline;
+  background: transparent;
+  margin: 0;
+  border: 0 none;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.App,
+button {
+  font-family: 'Acme', sans-serif;
+}
+
+.App {
+  text-align: center;
+  background-color: $dark-green;
+}
+
+.App-header {
+  background-color: $dark-green;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.chess-board {
+  position: relative;
+  background-image: url('../images/chessboard.png');
+  aspect-ratio: 1/1;
+  max-height: 80vh;
+  margin: auto;
+  background-size: contain;
+}
+.piece,
+.hint {
+  height: 12.5%;
+  width: 12.5%;
+  position: absolute;
+  background-size: 100%;
+  top: 0;
+  left: 0;
+}
+.selected {
+  background-color: rgb(236, 167, 34);
+  opacity: 0.5;
+}
+.hint {
+  background-color: rgba(0,0,0,.1);
+  padding: 4.2%;
+  background-clip: content-box;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+.game-over-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: $dark-green;
+  border: 10px solid black;
+  padding: 30px 40px;
+  width: 70%;
+}
+.game-over-text {
+  font-size: 70px;
+  color: white;
+}
+.new-game-bttn {
+  width: 50%;
+  padding: 10px;
+  border: none;
+  background: $forest-green;
+  color: white;
+  margin-top: 30px;
+  font-size: 20px;
+  cursor: pointer;
+  &:hover {
+    background: darken($forest-green, 5%);
+  }
+}
+
+// Piece positioning
+$nums: 1,2,3,4,5,6,7,8;
+@each $numx in $nums {
+  @each $numy in $nums {
+    $translateY: percentage(8 - $numy);
+    $translateX: percentage($numx - 1);
+    .square-#{$numx}#{$numy} {
+      transform: translateY($translateY) translateX($translateX);
+    }
+  }
+}
+
+// Piece images
+$pieces: wr,wn,wb,wq,wk,wp,br,bn,bb,bq,bk,bp;
+@each $piece in $pieces {
+  .#{$piece} {
+    background-image: url('../images/pieces/#{$piece}.png');
+  }
+}
