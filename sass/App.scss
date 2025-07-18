@@ -1,6 +1,8 @@
-@import 'global/variables';
-
+@use 'global/variables' as *;
+@use "sass:color";
+@use "sass:math";
 @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+
 body {  
   font-size: 100%;
   text-decoration: none;
@@ -28,6 +30,12 @@ button {
 .App {
   text-align: center;
   background-color: $dark-green;
+  display: flex;
+}
+
+main {
+  flex: 1;
+  margin: 0 30px;
 }
 
 .App-header {
@@ -38,6 +46,29 @@ button {
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.new-game-bttn {
+  max-width: 150px;
+  padding: 10px;
+  border: none;
+  background: $forest-green;
+  color: white;
+  margin-top: 30px;
+  font-size: 20px;
+  cursor: pointer;
+  &:hover {
+    background: color.adjust($forest-green, $lightness: -5%);
+  }
+}
+
+
+//////////////////
+// Components ---------------------------------------------------
+//////////////////
+
+//////////////////
+// Chess Board
+//////////////////
 
 .chess-board {
   position: relative;
@@ -81,26 +112,13 @@ button {
   font-size: 70px;
   color: white;
 }
-.new-game-bttn {
-  width: 50%;
-  padding: 10px;
-  border: none;
-  background: $forest-green;
-  color: white;
-  margin-top: 30px;
-  font-size: 20px;
-  cursor: pointer;
-  &:hover {
-    background: darken($forest-green, 5%);
-  }
-}
 
 // Piece positioning
 $nums: 1,2,3,4,5,6,7,8;
 @each $numx in $nums {
   @each $numy in $nums {
-    $translateY: percentage(8 - $numy);
-    $translateX: percentage($numx - 1);
+    $translateY: math.percentage(8 - $numy);
+    $translateX: math.percentage($numx - 1);
     .square-#{$numx}#{$numy} {
       transform: translateY($translateY) translateX($translateX);
     }
@@ -113,4 +131,15 @@ $pieces: wr,wn,wb,wq,wk,wp,br,bn,bb,bq,bk,bp;
   .#{$piece} {
     background-image: url('../images/pieces/#{$piece}.png');
   }
+}
+
+
+/////////////////
+// Side menu
+/////////////////
+
+.side-menu {
+  height: 100%;
+  width: 200px;
+  background: $brown;
 }

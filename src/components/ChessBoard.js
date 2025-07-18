@@ -1,24 +1,10 @@
-import React, { useState } from 'react';
-import { Chess } from 'chess.js'
+import { useState } from 'react';
+import GameOver from './GameOver';
 
 
-export default function ChessBoard() {
-  const [chess, setChess] = useState(new Chess());
-
-  const pieces = chess.board().flat(1).filter(Boolean);
+export default function ChessBoard( { gameRef, setRefAndSavePosition, handleNewGame } ) {
+  const pieces = gameRef.current.board().flat(1).filter(Boolean);
   const [selected_square, setSelected] = useState('');
-  const [hints, setHints] = useState([]);
-
-  const game_over_div =
-    <div className={'game-over-card'}>
-      <div className={'game-over-text'}>
-        Game Over Mutha Fucka
-      </div>
-      <button className={'new-game-bttn'} onClick={startNewGame}>
-        New Game
-      </button>
-    </div>
-  const game_over = chess.isGameOver() ? game_over_div : '';
 
   const all_pieces = pieces.map(({ square, type, color }, i) =>
     <div
@@ -28,7 +14,7 @@ export default function ChessBoard() {
     />
   );
 
-  const moves = selected_square ? chess.moves({ square: selected_square }) : [];
+  const moves = selected_square ? gameRef.current.moves({ square: selected_square }) : [];
   const hint_divs = moves.map((hint, i) =>
     <div
       key={i}
@@ -41,13 +27,9 @@ export default function ChessBoard() {
     <div className="chess-board">
       {all_pieces}
       {hint_divs}
-      {game_over}
+      {gameRef.current.isGameOver() ? <GameOver handleNewGame={handleNewGame} /> : ''}
     </div>
   );
-
-  function startNewGame () {
-    setChess(new Chess());
-  }
 
   function numerical_pos(position) {
     const [cur_x, cur_y] = position.match(/([a-z]\d)/)[0];
@@ -57,11 +39,12 @@ export default function ChessBoard() {
 
   function movePiece (to) {
     try {
-      chess.move(to);
+      gameRef.current.move(to);
     } catch (err) {
-      console.log(`caught ${err}`);
+      console.error(`Error moving piece: ${err}`);
     }
     setSelected('');
+    setRefAndSavePosition()
   }
 
   function clickPiece (index) {
