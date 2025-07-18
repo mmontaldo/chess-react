@@ -1,6 +1,6 @@
 # React Chess App
 
-Play chess on your local machine with this React based Chess application.
+Play chess on your local machine with this React driven application.
 
 ## Local run 
 
