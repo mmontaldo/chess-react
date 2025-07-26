@@ -1,53 +1,68 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GameOver from './GameOver';
 
+export default function ChessBoard({ gameRef, fen, onMove, handleNewGame }) {
+  const [selectedSquare, setSelectedSquare] = useState('');
+  const [pieces, setPieces] = useState([]);
 
-export default function ChessBoard( { gameRef, setRefAndSavePosition, handleNewGame } ) {
-  const pieces = gameRef.current.board().flat(1).filter(Boolean);
-  const [selected_square, setSelected] = useState('');
+  useEffect(() => {
+    if (!fen) return;
 
-  const all_pieces = pieces.map(({ square, type, color }, i) =>
+    try {
+      gameRef.current.load(fen);
+      setPieces(gameRef.current.board().flat().filter(Boolean));
+    } catch (err) {
+      console.error('Failed to load FEN in ChessBoard', err);
+    }
+  }, [fen]);
+
+  const moves = selectedSquare ? gameRef.current.moves({ square: selectedSquare }) : [];
+
+  const allPieces = pieces.map(({ square, type, color }, i) => (
     <div
-    className={`piece ${color + type} square-${numerical_pos(square)}`}
-    key={i}
-    onClick={() => clickPiece(i)}
+      key={`piece-${i}`}
+      className={`piece ${color}${type} square-${numericalPos(square)}`}
+      onClick={() => handlePieceClick(square)}
     />
-  );
+  ));
 
-  const moves = selected_square ? gameRef.current.moves({ square: selected_square }) : [];
-  const hint_divs = moves.map((hint, i) =>
+  const hintDivs = moves.map((move, i) => (
     <div
-      key={i}
-      onClick={() => movePiece(hint)}
-      className={`hint square-${numerical_pos(hint)}`}
+      key={`hint-${i}`}
+      className={`hint square-${numericalPos(move)}`}
+      onClick={() => handleMove(move)}
     />
-  );
+  ));
 
   return (
     <div className="chess-board">
-      {all_pieces}
-      {hint_divs}
-      {gameRef.current.isGameOver() ? <GameOver handleNewGame={handleNewGame} /> : ''}
+      {allPieces}
+      {hintDivs}
+      {gameRef.current.isGameOver() && (
+        <GameOver handleNewGame={handleNewGame} />
+      )}
     </div>
   );
 
-  function numerical_pos(position) {
+  function handlePieceClick(square) {
+    setSelectedSquare(square);
+  }
+
+  function handleMove(to) {
+    try {
+      gameRef.current.move(to);
+      onMove();
+      setPieces(gameRef.current.board().flat().filter(Boolean));
+    } catch (err) {
+      console.error('Move error:', err);
+    }
+    setSelectedSquare('');
+  }
+
+  function numericalPos (position) {
     const [cur_x, cur_y] = position.match(/([a-z]\d)/)[0];
     const num_x = ['a','b','c','d','e','f','g','h'].indexOf(cur_x) + 1;
     return num_x + '' + cur_y;
   }
-
-  function movePiece (to) {
-    try {
-      gameRef.current.move(to);
-    } catch (err) {
-      console.error(`Error moving piece: ${err}`);
-    }
-    setSelected('');
-    setRefAndSavePosition()
-  }
-
-  function clickPiece (index) {
-    setSelected(pieces[index].square);
-  }
 }
+

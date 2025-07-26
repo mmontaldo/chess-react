@@ -9,12 +9,6 @@ function App() {
 
   const [ storedPosition, setStoredPosition ] = useLocalStorage('chess-fen', null);
   const gameRef = useRef(new Chess());
-  const [ gamePosition, setGamePosition ] = useState("");
-
-  const setRefAndSavePosition = () => {
-    setGamePosition(gameRef.current.fen());
-    setStoredPosition(gameRef.current.fen());
-  }
 
   useEffect(() => {
     try {
@@ -23,12 +17,15 @@ function App() {
       console.error('Invalid FEN loaded from Storage: Resetting game');
       gameRef.current = new Chess();
     }
-    setRefAndSavePosition();
   }, [storedPosition]);
+
+  const saveCurrentPosition = () => {
+    setStoredPosition(gameRef.current.fen());
+  }
 
   const handleNewGame = () => {
     gameRef.current.reset();
-    setRefAndSavePosition();
+    saveCurrentPosition();
   };
 
   return (
@@ -39,9 +36,10 @@ function App() {
           <h1>ChessReact</h1>
         </header>
         <ChessBoard
-          handleNewGame={handleNewGame}
           gameRef={gameRef}
-          setRefAndSavePosition={setRefAndSavePosition}
+          fen={storedPosition}
+          onMove={saveCurrentPosition}
+          handleNewGame={handleNewGame}
         />
       </main>
     </div>
