@@ -8,7 +8,8 @@ export default function ChessBoard({
   setSelectedSquare,
   movePiece,
   getLegalMoves,
-  resetGame
+  resetGame,
+  theme
 }) {
 
   const allPieces = pieces.map(({ square, type, color }, i) => (
@@ -29,7 +30,7 @@ export default function ChessBoard({
   ));
 
   return (
-    <div className={`chess-board wood `}>
+    <div className={`chess-board ${theme}`}>
       {allPieces}
       {hintDivs}
       {gameRef.current?.isGameOver() && (

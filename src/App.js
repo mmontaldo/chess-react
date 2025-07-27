@@ -1,7 +1,9 @@
 import './css/App.css';
-import useChessGame from './hooks/useChessGame';
 import ChessBoard from './components/ChessBoard.js';
 import SideMenu from './components/SideMenu.js';
+
+import useChessGame from './hooks/useChessGame';
+import useLocalStorage from './hooks/useLocalStorage';
 
 function App() {
   const {
@@ -14,10 +16,14 @@ function App() {
     resetGame
   } = useChessGame();
 
+  const [ theme, setTheme ] = useLocalStorage('chess-theme', 'wood');
+
   return (
     <div className="App">
       <SideMenu
         resetGame={resetGame}
+        theme={theme}
+        setTheme={setTheme}
       />
       <main>
         <header className="App-header">
@@ -32,6 +38,7 @@ function App() {
           getLegalMoves={getLegalMoves}
           isGameOver={gameRef.current.isGameOver()}
           handleNewGame={resetGame}
+          theme={theme}
         />
       </main>
     </div>

@@ -23,7 +23,8 @@ html, body, #root, .App {
 }
 
 .App,
-button {
+button,
+.select-dropdown {
   font-family: 'Acme', sans-serif;
 }
 
@@ -48,12 +49,10 @@ main {
 }
 
 .new-game-bttn {
-  max-width: 150px;
   padding: 10px;
   border: none;
   background: $forest-green;
   color: white;
-  margin-top: 30px;
   font-size: 20px;
   cursor: pointer;
   &:hover {
@@ -72,11 +71,16 @@ main {
 
 .chess-board {
   position: relative;
-  background-image: url('../images/chessboard.png');
   aspect-ratio: 1/1;
   max-height: 80vh;
   margin: auto;
   background-size: contain;
+  &.wood {
+    background-image: url('../images/chessboard-wood.png');
+  }
+  &.green {
+    background-image: url('../images/chessboard-green.png');
+  }
 }
 .piece,
 .hint {
@@ -142,4 +146,27 @@ $pieces: wr,wn,wb,wq,wk,wp,br,bn,bb,bq,bk,bp;
   height: 100%;
   width: 200px;
   background: $brown;
+  padding: 20px;
+  text-align: left;
+  nav > * {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+.select-dropdown {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: $forest-green;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  &:hover {
+    background: color.adjust($forest-green, $lightness: -5%);
+  }
 }
