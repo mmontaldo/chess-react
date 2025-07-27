@@ -21,6 +21,7 @@ function SideMenu ({ resetGame, theme, setTheme }) {
           >
             <option value="wood">Wood</option>
             <option value="green">Green</option>
+            <option value="stone">Stone</option>
           </select>
         </div>
       </nav>

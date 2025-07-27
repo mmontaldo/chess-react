@@ -68,6 +68,9 @@ main {
 .chess-board.green {
   background-image: url("../images/chessboard-green.png");
 }
+.chess-board.stone {
+  background-image: url("../images/chessboard-stone.png");
+}
 
 .piece,
 .hint {
@@ -420,12 +423,14 @@ main {
   text-align: left;
 }
 .side-menu nav > * {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   width: 100%;
 }
 
 label {
   margin-bottom: 5px;
+  font-size: 18px;
+  line-height: 28px;
 }
 
 .select-dropdown {

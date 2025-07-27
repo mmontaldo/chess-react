@@ -81,6 +81,9 @@ main {
   &.green {
     background-image: url('../images/chessboard-green.png');
   }
+  &.stone {
+    background-image: url('../images/chessboard-stone.png');
+  }
 }
 .piece,
 .hint {
@@ -149,13 +152,15 @@ $pieces: wr,wn,wb,wq,wk,wp,br,bn,bb,bq,bk,bp;
   padding: 20px;
   text-align: left;
   nav > * {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     width: 100%;
   }
 }
 
 label {
   margin-bottom: 5px;
+  font-size: 18px;
+  line-height: 28px;
 }
 
 .select-dropdown {
