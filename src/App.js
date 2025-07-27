@@ -1,45 +1,37 @@
 import './css/App.css';
-import { useState, useRef, useEffect } from 'react';
-import { Chess } from 'chess.js';
-import useLocalStorage from './hooks/useLocalStorage';
+import useChessGame from './hooks/useChessGame';
 import ChessBoard from './components/ChessBoard.js';
 import SideMenu from './components/SideMenu.js';
 
 function App() {
-
-  const [ storedPosition, setStoredPosition ] = useLocalStorage('chess-fen', null);
-  const gameRef = useRef(new Chess());
-
-  useEffect(() => {
-    try {
-      gameRef.current = new Chess(storedPosition || undefined);
-    } catch (error) {
-      console.error('Invalid FEN loaded from Storage: Resetting game');
-      gameRef.current = new Chess();
-    }
-  }, [storedPosition]);
-
-  const saveCurrentPosition = () => {
-    setStoredPosition(gameRef.current.fen());
-  }
-
-  const handleNewGame = () => {
-    gameRef.current.reset();
-    saveCurrentPosition();
-  };
+  const {
+    gameRef,
+    pieces,
+    selectedSquare,
+    setSelectedSquare,
+    movePiece,
+    getLegalMoves,
+    resetGame
+  } = useChessGame();
 
   return (
     <div className="App">
-      <SideMenu handleNewGame={handleNewGame} />
+      <SideMenu
+        resetGame={resetGame}
+      />
       <main>
         <header className="App-header">
           <h1>ChessReact</h1>
         </header>
         <ChessBoard
           gameRef={gameRef}
-          fen={storedPosition}
-          onMove={saveCurrentPosition}
-          handleNewGame={handleNewGame}
+          pieces={pieces}
+          selectedSquare={selectedSquare}
+          setSelectedSquare={setSelectedSquare}
+          movePiece={movePiece}
+          getLegalMoves={getLegalMoves}
+          isGameOver={gameRef.current.isGameOver()}
+          handleNewGame={resetGame}
         />
       </main>
     </div>
