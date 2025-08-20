@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-function SideMenu ({ resetGame, theme, setTheme }) {
+function SideMenu({ resetGame, theme, setTheme }) {
   const handleThemeChange = (event) => {
     setTheme(event.target.value);
   };
@@ -8,7 +8,7 @@ function SideMenu ({ resetGame, theme, setTheme }) {
   return (
     <aside className="side-menu">
       <nav aria-label="Main menu">
-        <button className={'new-game-bttn'} type="button" onClick={resetGame}>
+        <button className={"new-game-bttn"} type="button" onClick={resetGame}>
           Start New Game
         </button>
         <div>
@@ -26,7 +26,7 @@ function SideMenu ({ resetGame, theme, setTheme }) {
         </div>
       </nav>
     </aside>
-  )
+  );
 }
 
-export default React.memo(SideMenu)
+export default React.memo(SideMenu);

@@ -1,12 +1,12 @@
-import { useState, useRef, useEffect } from 'react';
-import { Chess } from 'chess.js';
-import useLocalStorage from './useLocalStorage';
+import { useState, useRef, useEffect } from "react";
+import { Chess } from "chess.js";
+import useLocalStorage from "./useLocalStorage";
 
-export default function useChessGame () {
-  const [ fen, setFen ] = useLocalStorage('chess-fen', null);
+export default function useChessGame() {
+  const [fen, setFen] = useLocalStorage("chess-fen", null);
   const gameRef = useRef(new Chess());
 
-  const [selectedSquare, setSelectedSquare] = useState('');
+  const [selectedSquare, setSelectedSquare] = useState("");
   const [pieces, setPieces] = useState([]);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function useChessGame () {
       gameRef.current.load(fen);
       updateGameState();
     } catch (error) {
-      console.error('Invalid FEN loaded from Storage: Resetting game');
+      console.error("Invalid FEN loaded from Storage: Resetting game");
       gameRef.current = new Chess();
     }
   }, [fen]);
@@ -35,14 +35,16 @@ export default function useChessGame () {
     try {
       gameRef.current.move(move);
       updateGameState();
-      setSelectedSquare('');
+      setSelectedSquare("");
     } catch (err) {
-      console.error('Move error:', err);
+      console.error("Move error:", err);
     }
   };
 
   const getLegalMoves = () => {
-    return selectedSquare ? gameRef.current.moves({ square: selectedSquare }) : [];
+    return selectedSquare
+      ? gameRef.current.moves({ square: selectedSquare })
+      : [];
   };
 
   return {
@@ -52,8 +54,6 @@ export default function useChessGame () {
     setSelectedSquare,
     movePiece,
     getLegalMoves,
-    resetGame
+    resetGame,
   };
 }
-
-

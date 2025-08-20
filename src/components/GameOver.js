@@ -1,16 +1,14 @@
-import React from 'react';
+import React from "react";
 
-function GameOver ({ handleNewGame }) {
+function GameOver({ handleNewGame }) {
   return (
-    <div className={'game-over-card'}>
-      <div className={'game-over-text'}>
-        Game Over
-      </div>
-      <button className={'new-game-bttn'} onClick={handleNewGame}>
+    <div className={"game-over-card"}>
+      <div className={"game-over-text"}>Game Over</div>
+      <button className={"new-game-bttn"} onClick={handleNewGame}>
         New Game
       </button>
     </div>
-  )
+  );
 }
 
-export default React.memo(GameOver)
+export default React.memo(GameOver);

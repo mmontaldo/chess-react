@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import GameOver from './GameOver';
+import GameOver from "./GameOver";
 
 export default function ChessBoard({
   gameRef,
@@ -9,9 +8,8 @@ export default function ChessBoard({
   movePiece,
   getLegalMoves,
   resetGame,
-  theme
+  theme,
 }) {
-
   const allPieces = pieces.map(({ square, type, color }, i) => (
     <div
       key={`piece-${i}`}
@@ -33,15 +31,13 @@ export default function ChessBoard({
     <div className={`chess-board ${theme}`}>
       {allPieces}
       {hintDivs}
-      {gameRef.current?.isGameOver() && (
-        <GameOver handleNewGame={resetGame} />
-      )}
+      {gameRef.current?.isGameOver() && <GameOver handleNewGame={resetGame} />}
     </div>
   );
 }
 
-function numericalPos (position) {
+function numericalPos(position) {
   const [cur_x, cur_y] = position.match(/([a-z]\d)/)[0];
-  const num_x = ['a','b','c','d','e','f','g','h'].indexOf(cur_x) + 1;
-  return num_x + '' + cur_y;
+  const num_x = ["a", "b", "c", "d", "e", "f", "g", "h"].indexOf(cur_x) + 1;
+  return num_x + "" + cur_y;
 }

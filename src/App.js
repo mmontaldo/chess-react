@@ -1,9 +1,9 @@
-import './css/App.css';
-import ChessBoard from './components/ChessBoard.js';
-import SideMenu from './components/SideMenu.js';
+import "./css/App.css";
+import ChessBoard from "./components/ChessBoard.js";
+import SideMenu from "./components/SideMenu.js";
 
-import useChessGame from './hooks/useChessGame';
-import useLocalStorage from './hooks/useLocalStorage';
+import useChessGame from "./hooks/useChessGame";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 function App() {
   const {
@@ -13,18 +13,14 @@ function App() {
     setSelectedSquare,
     movePiece,
     getLegalMoves,
-    resetGame
+    resetGame,
   } = useChessGame();
 
-  const [ theme, setTheme ] = useLocalStorage('chess-theme', 'wood');
+  const [theme, setTheme] = useLocalStorage("chess-theme", "wood");
 
   return (
     <div className="App">
-      <SideMenu
-        resetGame={resetGame}
-        theme={theme}
-        setTheme={setTheme}
-      />
+      <SideMenu resetGame={resetGame} theme={theme} setTheme={setTheme} />
       <main>
         <header className="App-header">
           <h1>ChessReact</h1>
